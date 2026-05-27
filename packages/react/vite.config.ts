@@ -1,7 +1,6 @@
 import react from '@vitejs/plugin-react';
 import { resolve } from 'path';
-import { PluginPure } from 'rollup-plugin-pure';
-import { visualizer } from 'rollup-plugin-visualizer';
+import Sonda from 'sonda/vite';
 import dts from 'vite-plugin-dts';
 import tsconfigPaths from 'vite-tsconfig-paths';
 import { defineConfig } from 'vitest/config';
@@ -13,10 +12,6 @@ export default defineConfig(({ mode }) => {
   const isAnalyze = mode === 'analyze';
 
   return {
-    esbuild: {
-      minifyIdentifiers: false,
-    },
-
     plugins: [
       react({
         babel: {
@@ -38,15 +33,11 @@ export default defineConfig(({ mode }) => {
           tsconfigPath: './tsconfig.build.json',
         }),
 
-      !isTest &&
-        PluginPure({
-          functions: ['Object.assign'],
-        }),
-
-      isAnalyze && visualizer(),
+      isAnalyze && Sonda(),
     ].filter(Boolean),
 
     build: {
+      sourcemap: isAnalyze,
       lib: {
         entry: {
           'audience': resolve(__dirname, 'src/modules/audience/index.ts'),
@@ -73,7 +64,7 @@ export default defineConfig(({ mode }) => {
         formats: ['es'],
       },
 
-      rollupOptions: {
+      rolldownOptions: {
         external: [
           ...Object.keys(dependencies ?? {}),
           ...Object.keys(peerDependencies ?? {}),
@@ -81,8 +72,8 @@ export default defineConfig(({ mode }) => {
           '@edifice.io/client',
           /^@edifice\.io\/tiptap-extensions\/.*/,
           /^@edifice\.io\/bootstrap\/.*/,
-          /^dayjs\/plugin\/.+\.js$/,
-          /^dayjs\/locale\/.+\.js$/,
+          /^dayjs\/plugin\/.+(\.js)?$/,
+          /^dayjs\/locale\/.+(\.js)?$/,
           /^antd\/locale\/.+/,
           /^swiper\/.*/,
           /^@edifice-ui\/icons\/.*/,
@@ -90,6 +81,10 @@ export default defineConfig(({ mode }) => {
         output: {
           preserveModules: true,
           preserveModulesRoot: 'src',
+          minify: { mangle: false },
+        },
+        treeshake: {
+          manualPureFunctions: ['Object.assign'],
         },
       },
     },

@@ -42,7 +42,7 @@ const config: StorybookConfig = {
     const { mergeConfig } = await import('vite');
 
     return mergeConfig(config, {
-      esbuild: {
+      oxc: {
         jsx: 'automatic',
       },
       // Add dependencies to pre-optimization
@@ -69,7 +69,7 @@ const config: StorybookConfig = {
           '@tanstack/react-query',
           'msw-storybook-addon',
         ],
-        esbuildOptions: {
+        rolldownOptions: {
           sourcemap: false,
         },
       },
