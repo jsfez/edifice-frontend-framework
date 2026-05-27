@@ -184,8 +184,7 @@
     "sonda": "catalog:",
     "typescript-eslint": "catalog:",
     "vite": "catalog:",
-    "vite-plugin-dts": "catalog:",
-    "vite-tsconfig-paths": "catalog:"
+    "vite-plugin-dts": "catalog:"
   },
   "peerDependencies": {
     "@react-spring/web": "catalog:",

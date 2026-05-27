@@ -2,7 +2,6 @@ import react from '@vitejs/plugin-react';
 import { resolve } from 'path';
 import Sonda from 'sonda/vite';
 import dts from 'vite-plugin-dts';
-import tsconfigPaths from 'vite-tsconfig-paths';
 import { defineConfig } from 'vitest/config';
 import { removeDsn } from '../../plugins/remove-display-name';
 import { dependencies, peerDependencies } from './package.json';
@@ -19,8 +18,6 @@ export default defineConfig(({ mode }) => {
         },
       }),
 
-      tsconfigPaths(),
-
       // Pas utile en test
       !isTest &&
         removeDsn({
@@ -35,6 +32,10 @@ export default defineConfig(({ mode }) => {
 
       isAnalyze && Sonda(),
     ].filter(Boolean),
+
+    resolve: {
+      tsconfigPaths: true,
+    },
 
     build: {
       sourcemap: isAnalyze,

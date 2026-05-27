@@ -45,13 +45,8 @@ const config: StorybookConfig = {
       oxc: {
         jsx: 'automatic',
       },
-      // Add dependencies to pre-optimization
       resolve: {
         alias: {
-          '@images': resolve(
-            dirname(fileURLToPath(import.meta.url)),
-            '../node_modules/@edifice.io/bootstrap/dist/images',
-          ),
           // Mermaid renderer used by MDX docs pages (e.g. UserRightsList guide).
           '@docs/Mermaid': resolve(
             dirname(fileURLToPath(import.meta.url)),
