@@ -75,7 +75,7 @@
     "turbo": "catalog:",
     "typescript": "catalog:",
     "typescript-eslint": "catalog:",
-    "vitest": "3.2.4"
+    "vitest": "catalog:"
   },
   "resolutions": {
     "katex": "0.16.33"
