@@ -3,6 +3,7 @@ import { ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Avatar, Flex } from '../../../..';
 import { HomeCard } from '../HomeCard';
+import { useProfileLinks } from './hooks/useProfileLinks';
 
 export type UserSpaceProps = {
   name: string;
@@ -18,6 +19,7 @@ export default function UserSpace({
   children,
 }: UserSpaceProps) {
   const { t } = useTranslation();
+  const links = useProfileLinks(profile);
 
   return (
     <HomeCard variant="user">
