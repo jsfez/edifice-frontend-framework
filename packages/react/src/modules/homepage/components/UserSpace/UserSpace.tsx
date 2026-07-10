@@ -22,7 +22,18 @@ export default function UserSpace({
   const links = useProfileLinks(profile);
 
   return (
-    <HomeCard variant="user">
+    <HomeCard
+      variant="user"
+      footer={
+        links && (
+          <>
+            {links.map((link) => (
+              <>{link.icon}</>
+            ))}
+          </>
+        )
+      }
+    >
       <Flex className={'user-space'} direction="row" gap="8">
         <Avatar
           className={'user-space--avatar'}

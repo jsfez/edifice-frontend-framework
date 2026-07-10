@@ -52,7 +52,10 @@ type Story = StoryObj<typeof HomeCard>;
 
 const renderCard = (args: HomeCardProps) => (
   <div style={{ maxWidth: 400 }}>
-    <HomeCard {...args}>
+    <HomeCard
+      footer={<p>Placer du contenu additionnel ici si besoin.</p>}
+      {...args}
+    >
       <HomeCard.Header
         title="Mes infos"
         actionLabel="Voir plus"

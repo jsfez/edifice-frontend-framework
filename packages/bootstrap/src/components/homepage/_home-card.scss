@@ -18,14 +18,12 @@
   }
 
   &--primary {
-    --home-card-padding: var(--primitive-spacer-8) var(--primitive-spacer-16)
-      var(--primitive-spacer-16) var(--primitive-spacer-16);
+    --home-card-padding: var(--primitive-spacer-8) var(--primitive-spacer-16) var(--primitive-spacer-16) var(--primitive-spacer-16);
     --home-card-gap: var(--primitive-spacer-8);
   }
 
   &--secondary {
-    --home-card-padding: var(--primitive-spacer-8) var(--primitive-spacer-16)
-      var(--primitive-spacer-16) var(--primitive-spacer-16);
+    --home-card-padding: var(--primitive-spacer-8) var(--primitive-spacer-16) var(--primitive-spacer-16) var(--primitive-spacer-16);
     --home-card-gap: var(--primitive-spacer-4);
     --home-card-background: var(--primitive-grey-100);
 
@@ -55,5 +53,12 @@
   &-content {
     display: flex;
     flex-direction: column;
+  }
+
+  // ---- Footer ----
+  &-footer {
+    background-color: var(--primitive-grey-100);
+    border-radius: var(--primitive-border-radius-2xl);
+    box-shadow: 0 4px 10px 0 rgb(0 0 0 / 18%);
   }
 }
