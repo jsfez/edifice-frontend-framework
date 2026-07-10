@@ -28,7 +28,9 @@ export default function UserSpace({
         links && (
           <>
             {links.map((link) => (
-              <>{link.icon}</>
+              <a href={link.url} target="_self">
+                {link.text}
+              </a>
             ))}
           </>
         )
