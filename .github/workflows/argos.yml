@@ -1,0 +1,50 @@
+name: Argos
+
+on:
+  push:
+    branches:
+      - develop
+  pull_request:
+    branches:
+      - develop
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  argos:
+    name: Visual testing
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write # required for Argos OIDC (no token secret needed)
+    env:
+      NPM_TOKEN: ""
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Build packages
+        run: pnpm run build
+
+      - name: Build Storybook
+        run: pnpm run docs:build
+
+      - name: Install Playwright browser
+        run: pnpm exec playwright install --with-deps chromium
+
+      - name: Capture screenshots with Argos
+        working-directory: apps/docs
+        run: pnpm exec playwright test --config=argos/playwright.config.ts

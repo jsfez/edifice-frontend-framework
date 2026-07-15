@@ -40,3 +40,8 @@ dist-ssr
 pnpm-lock.yaml
 .pnpm-store
 .claude
+
+# Argos visual testing (local artifacts)
+apps/docs/argos/screenshots/
+apps/docs/screenshots/
+**/test-results/
